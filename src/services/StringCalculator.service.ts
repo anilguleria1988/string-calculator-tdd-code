@@ -10,14 +10,15 @@ export class StringCalculatorTDD {
         }
 
         // TEST 5 AFTER REFACTOR
-        const normalizedNumbers = this.normalizeDelimiters(numbers);
+        /* const normalizedNumbers = this.normalizeDelimiters(numbers);
         const numberArray = this.parseNumbers(normalizedNumbers);
         this.validateNumbers(numberArray);
-        return this.calculateSum(numberArray);
-    }
+        return this.calculateSum(numberArray); */
 
-    private parseNumbers(numbers: string): number[] {
-        return numbers.split(CONSTANTS.DEFAULT_DELIMITER).map(num => parseInt(num));
+        // TEST 6 CUSTOM DELIMETERS
+        const allNumbers = this.extractAllNumbers(numbers);
+        this.validateNumbers(allNumbers);
+        return this.calculateSum(allNumbers);
     }
 
     private calculateSum(numbers: number[]): number {
@@ -31,10 +32,28 @@ export class StringCalculatorTDD {
         }
     }
 
-    private normalizeDelimiters(numbers: string): string {
-        return numbers.replace(CONSTANTS.NEWLINE_REGEX, CONSTANTS.DEFAULT_DELIMITER);
-    }
     private isEmpty(numbers: string): boolean {
         return numbers === '';
+    }
+
+    private extractAllNumbers(input: string): number[] {
+        // Step 1: Handle custom delimiter format //[delimiter]\n or //delimiter\n
+        let numbersString = input;
+
+        if (input.startsWith('//')) {
+            const newlineIndex = input.indexOf('\n');
+            numbersString = input.substring(newlineIndex + 1);
+        }
+
+        // Step 2: Extract all numbers using regex - this is the KEY insight!
+        // Replace ALL non-digit characters (except minus for negative numbers) with spaces
+        const cleanString = numbersString.replace(/[^\d-]/g, ' ');
+
+        // Split by spaces and parse numbers
+        return cleanString
+            .split(/\s+/)
+            .filter(str => str.trim() !== '')
+            .map(str => parseInt(str))
+            .filter(num => !isNaN(num));
     }
 }

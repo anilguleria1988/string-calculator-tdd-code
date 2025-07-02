@@ -40,9 +40,18 @@ describe('StringCalculator', () => {
     });
 
     // TEST 6 : HANDLE CUSTOM DELIMITERS
-    test('should support different delimiters', () => {
+    /* test('should support different delimiters', () => {
         expect(calculator.add('//;\n1;2')).toBe(3);
         expect(calculator.add('//|\n1|2|3')).toBe(6);
+    }); */
+    test('should extract numbers regardless of delimiters', () => {
+        expect(calculator.add('//;\n1;2;3')).toBe(6);
+        expect(calculator.add('//|\n1|2|3')).toBe(6);
+        expect(calculator.add('//[***]\n1***2***3')).toBe(6);
+
+        // Mixed delimiters - the real test!
+        expect(calculator.add('//;\n1;2;3\n4,5')).toBe(15);
+        expect(calculator.add('//[***]\n1***2***3\n4,5;6')).toBe(21);
     });
 });
 
