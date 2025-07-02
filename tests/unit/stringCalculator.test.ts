@@ -38,5 +38,11 @@ describe('StringCalculator', () => {
         expect(calculator.add('1\n4,15')).toBe(20);
         expect(calculator.add('11\n7\n9')).toBe(27);
     });
+
+    // TEST 6 : HANDLE CUSTOM DELIMITERS
+    test('should support different delimiters', () => {
+        expect(calculator.add('//;\n1;2')).toBe(3);
+        expect(calculator.add('//|\n1|2|3')).toBe(6);
+    });
 });
 

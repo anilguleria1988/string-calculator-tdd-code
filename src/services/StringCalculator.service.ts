@@ -8,17 +8,9 @@ export class StringCalculatorTDD {
         if (this.isEmpty(numbers)) {
             return Number(process.env.RETURN_NUMBER) || CONSTANTS.NUMBERS.ZERO;
         }
-        // return parseInt(numbers);
-        /* const nums = numbers.split(',');
-        return nums.reduce((sum, num) => sum + parseInt(num), 0); */
 
-        // TEST 4
-        /* const numberArray = this.parseNumbers(numbers);
-        this.validateNumbers(numberArray);
-        return this.calculateSum(numberArray); */
-
-        // TEST 5
-        const normalizedNumbers = numbers.replace(/\n/g, CONSTANTS.DEFAULT_DELIMITER);
+        // TEST 5 AFTER REFACTOR
+        const normalizedNumbers = this.normalizeDelimiters(numbers);
         const numberArray = this.parseNumbers(normalizedNumbers);
         this.validateNumbers(numberArray);
         return this.calculateSum(numberArray);
@@ -39,6 +31,9 @@ export class StringCalculatorTDD {
         }
     }
 
+    private normalizeDelimiters(numbers: string): string {
+        return numbers.replace(CONSTANTS.NEWLINE_REGEX, CONSTANTS.DEFAULT_DELIMITER);
+    }
     private isEmpty(numbers: string): boolean {
         return numbers === '';
     }
