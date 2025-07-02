@@ -26,5 +26,11 @@ describe('StringCalculator', () => {
         expect(calculator.add('5,2')).toBe(7);
         expect(calculator.add('0,4')).toBe(4);
     });
+
+    // TEST 4 : HANDLE ANY AMOUNT OF INPUT STRING NUMBERS
+    test('should handle any amount of numbers', () => {
+        expect(calculator.add('2,1,10,24,7')).toBe(44);
+        expect(calculator.add('4,11,3,12')).toBe(30);
+    });
 });
 
