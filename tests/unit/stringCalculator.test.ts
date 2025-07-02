@@ -56,9 +56,24 @@ describe('StringCalculator', () => {
 
     // TEST 7 : HANDLE NEGATIVE NUMBERS
     test('should throw exception for negative numbers', () => {
-        expect(() => {calculator.add('-1,2')}).toThrow('negative numbers not allowed -1');
-        expect(() => calculator.add('2,-4,3,-5')).toThrow('negative numbers not allowed -4,-5');
-        expect(() => calculator.add('//;\n1;-2;3')).toThrow('negative numbers not allowed -2');
+        console.log('\nTEST 7: Negative Numbers (Should Throw Exception)');
+
+        const testCases = [
+            { input: '-1,2', expectedError: 'negative numbers not allowed -1' },
+            { input: '2,-4,3,-5', expectedError: 'negative numbers not allowed -4,-5' },
+            { input: '//;\n1;-2;3', expectedError: 'negative numbers not allowed -2' }
+        ];
+
+        testCases.forEach(({ input, expectedError }, index) => {
+            try {
+                const result = calculator.add(input);
+                console.log(`Got result ${result} instead of error`);
+                expect(() => calculator.add(input)).toThrow(expectedError);
+            } catch (error: any) {
+                console.log(`Get thrown error : "${error.message}"`);
+                expect(error.message).toBe(expectedError);
+            }
+        });
     });
 });
 

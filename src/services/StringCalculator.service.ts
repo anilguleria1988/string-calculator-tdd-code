@@ -11,13 +11,6 @@ export class StringCalculatorTDD {
             return Number(process.env.RETURN_NUMBER) || CONSTANTS.NUMBERS.ZERO;
         }
 
-        // TEST 5 AFTER REFACTOR
-        /* const normalizedNumbers = this.normalizeDelimiters(numbers);
-        const numberArray = this.parseNumbers(normalizedNumbers);
-        this.validateNumbers(numberArray);
-        return this.calculateSum(numberArray); */
-
-        // TEST 6 CUSTOM DELIMETERS
         const allNumbers = DelimetersHandler.extractAllNumbers(numbers);
         ValidationHandler.validateNumbers(allNumbers);
         return this.calculateSum(allNumbers);
