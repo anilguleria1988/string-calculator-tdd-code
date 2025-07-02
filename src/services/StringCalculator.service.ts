@@ -11,7 +11,15 @@ export class StringCalculatorTDD {
         // return parseInt(numbers);
         /* const nums = numbers.split(',');
         return nums.reduce((sum, num) => sum + parseInt(num), 0); */
-        const numberArray = this.parseNumbers(numbers);
+
+        // TEST 4
+        /* const numberArray = this.parseNumbers(numbers);
+        this.validateNumbers(numberArray);
+        return this.calculateSum(numberArray); */
+
+        // TEST 5
+        const normalizedNumbers = numbers.replace(/\n/g, CONSTANTS.DEFAULT_DELIMITER);
+        const numberArray = this.parseNumbers(normalizedNumbers);
         this.validateNumbers(numberArray);
         return this.calculateSum(numberArray);
     }
@@ -29,7 +37,7 @@ export class StringCalculatorTDD {
         if (invalidNumbers.length > 0) {
             throw new Error('Invalid numbers detected');
         }
-    }   
+    }
 
     private isEmpty(numbers: string): boolean {
         return numbers === '';

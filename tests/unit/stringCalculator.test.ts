@@ -32,5 +32,11 @@ describe('StringCalculator', () => {
         expect(calculator.add('2,1,10,24,7')).toBe(44);
         expect(calculator.add('4,11,3,12')).toBe(30);
     });
+
+    // TEST 5 : HANDLE NEW LINE BETWEEN NUMBERS
+    test('should handle new lines between numbers', () => {
+        expect(calculator.add('1\n4,15')).toBe(20);
+        expect(calculator.add('11\n7\n9')).toBe(27);
+    });
 });
 

@@ -12,3 +12,5 @@ export const NUMBERS = {
 };
 
 export const DEFAULT_DELIMITER = ',';
+
+export const NEWLINE_REGEX = /\n/g;
