@@ -20,5 +20,11 @@ describe('StringCalculator', () => {
         expect(calculator.add('3')).toBe(3);
         expect(calculator.add('8')).toBe(8);
     });
+
+    // TEST 3 : HANDLE TWO INPUT STRING NUMBERS
+    test('should return sum of two comma-separated numbers', () => {
+        expect(calculator.add('5,2')).toBe(7);
+        expect(calculator.add('0,4')).toBe(4);
+    });
 });
 
